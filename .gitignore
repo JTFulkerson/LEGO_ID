@@ -1,0 +1,16 @@
+# Ignore Python byte code files, build directories, and pycache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.egg-info/
+dist/
+build/
+
+# Ignore Visual Studio Code files and folders
+.vscode/
+*.code-workspace
+
+# Ignore the response.json file
+response.json
