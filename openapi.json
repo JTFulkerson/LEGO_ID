@@ -1,0 +1,328 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Brickognize",
+    "description": "\nBrickognize API allows users to upload image and which parts, sets, or figures it contains.\n",
+    "termsOfService": "https://brickognize.com/terms-of-service/",
+    "contact": { "email": "piotr.rybak@brickognize.com" },
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/predict/": {
+      "post": {
+        "tags": ["/predict/"],
+        "summary": "Predict",
+        "operationId": "predict_predict__post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_predict_predict__post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Listing" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict/parts/": {
+      "post": {
+        "tags": ["/predict/parts/"],
+        "summary": "Predict Parts",
+        "operationId": "predict_parts_predict_parts__post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_predict_parts_predict_parts__post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Listing" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict/sets/": {
+      "post": {
+        "tags": ["/predict/sets/"],
+        "summary": "Predict Sets",
+        "operationId": "predict_sets_predict_sets__post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_predict_sets_predict_sets__post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Listing" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict/figs/": {
+      "post": {
+        "tags": ["/predict/figs/"],
+        "summary": "Predict Figs",
+        "operationId": "predict_figs_predict_figs__post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_predict_figs_predict_figs__post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Listing" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_predict_figs_predict_figs__post": {
+        "title": "Body_predict_figs_predict_figs__post",
+        "required": ["query_image"],
+        "type": "object",
+        "properties": {
+          "query_image": {
+            "title": "Query Image",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "Body_predict_parts_predict_parts__post": {
+        "title": "Body_predict_parts_predict_parts__post",
+        "required": ["query_image"],
+        "type": "object",
+        "properties": {
+          "query_image": {
+            "title": "Query Image",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "Body_predict_predict__post": {
+        "title": "Body_predict_predict__post",
+        "required": ["query_image"],
+        "type": "object",
+        "properties": {
+          "query_image": {
+            "title": "Query Image",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "Body_predict_sets_predict_sets__post": {
+        "title": "Body_predict_sets_predict_sets__post",
+        "required": ["query_image"],
+        "type": "object",
+        "properties": {
+          "query_image": {
+            "title": "Query Image",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "BoundingBox": {
+        "title": "BoundingBox",
+        "required": ["left", "upper", "right", "lower", "score"],
+        "type": "object",
+        "properties": {
+          "left": { "title": "Left", "type": "number", "example": 0.0 },
+          "upper": { "title": "Upper", "type": "number", "example": 0.0 },
+          "right": { "title": "Right", "type": "number", "example": 320.0 },
+          "lower": { "title": "Lower", "type": "number", "example": 240.0 },
+          "score": { "title": "Score", "type": "number", "example": 0.99 }
+        }
+      },
+      "ExternalSite": {
+        "title": "ExternalSite",
+        "required": ["name", "url"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string", "example": "bricklink" },
+          "url": {
+            "title": "Url",
+            "type": "string",
+            "example": "https://www.bricklink.com/v2/catalog/catalogitem.page?P=3001"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ValidationError" }
+          }
+        }
+      },
+      "Item": {
+        "title": "Item",
+        "required": [
+          "id",
+          "score",
+          "name",
+          "img_url",
+          "external_sites",
+          "category",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": { "title": "Id", "type": "string", "example": "3001" },
+          "score": { "title": "Score", "type": "number", "example": 0.9 },
+          "name": {
+            "title": "Name",
+            "type": "string",
+            "example": "Brick 2 x 4"
+          },
+          "img_url": {
+            "title": "Img Url",
+            "type": "string",
+            "example": "https://storage.googleapis.com/brickognize-static/thumbnails/parts/3001/0.png"
+          },
+          "external_sites": {
+            "title": "External Sites",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ExternalSite" }
+          },
+          "category": {
+            "title": "Category",
+            "type": "string",
+            "example": "Brick"
+          },
+          "type": { "title": "Type", "type": "string", "example": "part" }
+        }
+      },
+      "Listing": {
+        "title": "Listing",
+        "required": ["listing_id", "bounding_box", "items"],
+        "type": "object",
+        "properties": {
+          "listing_id": {
+            "title": "Listing Id",
+            "type": "string",
+            "example": "d492bca0"
+          },
+          "bounding_box": { "$ref": "#/components/schemas/BoundingBox" },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Item" }
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": ["loc", "msg", "type"],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] }
+          },
+          "msg": { "title": "Message", "type": "string" },
+          "type": { "title": "Error Type", "type": "string" }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "/predict/",
+      "description": "Accepts an image file containing a single item and returns a JSON object with a top-k most probable parts, sets, or figures. It uses bricklink.com ids and categories.\nWARNING: This endpoint will likely change in the near future."
+    },
+    {
+      "name": "/predict/parts/",
+      "description": "Accepts an image file containing a single part and returns a JSON object with a top-k most probable parts. It uses bricklink.com ids and categories."
+    },
+    {
+      "name": "/predict/sets/",
+      "description": "Accepts an image file containing a single set and returns a JSON object with a top-k most probable sets. It uses bricklink.com ids and categories."
+    },
+    {
+      "name": "/predict/figs/",
+      "description": "Accepts an image file containing a single figure and returns a JSON object with a top-k most probable figures. It uses bricklink.com ids and categories."
+    }
+  ]
+}
