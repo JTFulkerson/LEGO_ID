@@ -1,16 +1,9 @@
-import requests
+import brickognize_api
 import json
 
-# Define the URL for the API endpoint
-url = "https://api.brickognize.com/predict/parts/"
 
-# Define the image file to be analyzed
-image_path = "./image.jpg"
-
-# Send the image file as a multipart-encoded file
-with open(image_path, "rb") as image_file:
-    image_data = {"query_image": ("image.jpg", image_file, "image/jpeg")}
-    response = requests.post(url, files=image_data)
+# Send the image to the brickognize API class and return the JSON response
+response = brickognize_api.predict_part("image.jpg")
 
 # Save the JSON response to a file
 with open("response.json", "w") as json_file:
